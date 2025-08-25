@@ -30,6 +30,19 @@ rawData.forEach(reading => {
   // Get main content (skip date line and verse repetition)
   let content = lines.slice(3).join('\n').trim();
   
+  // If content is still empty, try parsing the entire body
+  if (!content && body) {
+    // Split on the verse and take the part after it
+    const verseIndex = body.indexOf(keyverse);
+    if (verseIndex > -1) {
+      content = body.substring(verseIndex + keyverse.length).trim();
+      // Remove leading newlines and whitespace
+      content = content.replace(/^\s*\n\s*/, '');
+    } else {
+      content = body;
+    }
+  }
+  
   const timeKey = time === 'am' ? 'morning' : 'evening';
   
   grouped[formattedDate][timeKey] = {

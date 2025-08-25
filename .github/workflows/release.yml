@@ -1,0 +1,111 @@
+name: 🚀 Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.2.3)'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Needed for release notes generation
+          
+      - name: 📦 Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+          
+      - name: 🔧 Install dependencies
+        run: bun install
+        
+      - name: 🏗️ Build web application
+        run: bun run build
+        
+      - name: 📝 Generate release notes
+        id: release_notes
+        run: |
+          VERSION=${{ github.ref_name || github.event.inputs.version }}
+          VERSION=${VERSION#v}  # Remove 'v' prefix if present
+          
+          bun run release-notes $VERSION
+          
+          # Set outputs for GitHub release
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "web_notes<<EOF" >> $GITHUB_OUTPUT
+          cat release-notes-web.md >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+      - name: 🌐 Deploy to Cloudflare
+        if: github.event_name == 'push'  # Only deploy on tag push
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          node build-worker.js
+          bunx wrangler deploy --env production
+          
+      - name: 📱 Build Android AAB
+        if: github.event_name == 'push'
+        run: |
+          # Set up JDK for Android build
+          echo "JAVA_HOME=$JAVA_HOME_17_X64" >> $GITHUB_ENV
+          
+          # Copy web build to Android assets
+          mkdir -p android/app/src/main/assets
+          cp -r dist android/app/src/main/assets/public
+          
+          # Build AAB (requires signing setup in secrets)
+          cd android && ./gradlew bundleRelease
+          
+      - name: 🎉 Create GitHub Release
+        if: github.event_name == 'push'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref_name }}
+          release_name: 🙏 Spurgeon Devotional ${{ steps.release_notes.outputs.version }}
+          body: ${{ steps.release_notes.outputs.web_notes }}
+          draft: false
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          
+      - name: 📦 Upload Release Assets
+        if: github.event_name == 'push'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/app/build/outputs/bundle/release/app-release.aab
+          asset_name: spurgeon-devotional-${{ steps.release_notes.outputs.version }}.aab
+          asset_content_type: application/octet-stream
+          
+      - name: 📱 Upload to Play Store
+        if: github.event_name == 'push' && secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON }}
+          packageName: com.straitstreet.spurgeon
+          releaseFiles: android/app/build/outputs/bundle/release/app-release.aab
+          track: production
+          status: draft  # Start as draft for manual review
+          whatsNewDirectory: .
+          
+      - name: 📄 Upload Release Notes
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-notes
+          path: |
+            release-notes-web.md
+            release-notes-playstore.txt
+            CHANGELOG.md

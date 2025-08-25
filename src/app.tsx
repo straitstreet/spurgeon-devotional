@@ -2,7 +2,7 @@ import { useState, useEffect } from 'preact/hooks';
 import { DevotionalView } from './components/DevotionalView';
 import { Header } from './components/Header';
 import { About } from './components/About';
-import { devotionalData, getReading } from './data/devotional-data.js';
+import { devotionalData as rawDevotionalData, getReading } from './data/devotional-data.js';
 import type { DevotionalData, DevotionalEntry } from './types/devotional';
 
 type View = 'devotional' | 'about';
@@ -16,14 +16,14 @@ export function App() {
   useEffect(() => {
     // Use pre-loaded binary data for ultra-fast loading
     const transformed = {
-      title: devotionalData.meta.title,
-      description: devotionalData.meta.description,
-      year: devotionalData.meta.year,
+      title: rawDevotionalData.meta.title,
+      description: rawDevotionalData.meta.description,
+      year: rawDevotionalData.meta.year,
       devotionals: {}
     };
     
     // Transform binary format to expected format
-    Object.entries(devotionalData.readings).forEach(([date, readings]: [string, any[]]) => {
+    Object.entries(rawDevotionalData.readings).forEach(([date, readings]: [string, any[]]) => {
       transformed.devotionals[date] = {};
       
       readings.forEach((reading: number[]) => {
@@ -31,11 +31,11 @@ export function App() {
         const time = timeFlag === 0 ? 'morning' : 'evening';
         
         transformed.devotionals[date][time] = {
-          date: devotionalData.tables.dates[dateIdx],
+          date: rawDevotionalData.tables.dates[dateIdx],
           time: time === 'morning' ? 'Morning' : 'Evening',
-          verse: devotionalData.tables.verses[verseIdx],
-          text: devotionalData.tables.texts[textIdx],
-          content: devotionalData.tables.contents[contentIdx]
+          verse: rawDevotionalData.tables.verses[verseIdx],
+          text: rawDevotionalData.tables.texts[textIdx],
+          content: rawDevotionalData.tables.contents[contentIdx]
         };
       });
     });
@@ -50,6 +50,7 @@ export function App() {
     const month = String(currentDate.getMonth() + 1).padStart(2, '0');
     const day = String(currentDate.getDate()).padStart(2, '0');
     const dateKey = `${month}-${day}`;
+    
     
     return devotionalData.devotionals[dateKey] || null;
   };

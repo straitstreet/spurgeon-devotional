@@ -1,6 +1,6 @@
 :root {
-  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
-  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', 'Hoefler Text', Cambria, serif;
   
   --color-cream: #f9f7f4;
   --color-warm-white: #fdfcfa;
@@ -30,9 +30,11 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--color-brown-900);
-  background-color: var(--color-cream);
+  background: linear-gradient(135deg, var(--color-cream) 0%, #f5f2ed 50%, var(--color-warm-white) 100%);
+  background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-display: swap;
 }
 
 #app {
@@ -163,6 +165,7 @@ h3 {
   font-size: 1.125rem;
   line-height: 1.8;
   color: var(--color-brown-800);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
 }
 
 .reading-content p {
@@ -175,13 +178,14 @@ h3 {
 
 .verse-reference {
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: var(--color-gold-500);
+  color: var(--color-brown-800);
   text-transform: uppercase;
   letter-spacing: 0.025em;
   margin-bottom: 0.75rem;
   display: block;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.9);
 }
 
 /* Loading states */

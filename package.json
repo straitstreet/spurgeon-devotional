@@ -9,11 +9,17 @@
     "preview": "bun run vite preview",
     "analyze": "bunx vite-bundle-analyzer",
     "install": "bun install",
+    "build:all": "node build-all.js",
+    "deploy:all": "node deploy-all.js",
+    "deploy:cf": "bun run build && node build-worker.js && bunx wrangler deploy --env production",
+    "deploy:playstore": "node deploy-all.js",
+    "release": "node deploy-all.js",
+    "setup:keystore": "node setup-android-keystore.js",
+    "release-notes": "node generate-release-notes.js",
     "cap:init": "bunx cap init",
     "cap:add": "bunx cap add android",
     "cap:sync": "bun run build && bunx cap sync",
-    "cap:run": "bunx cap run android",
-    "android:build": "bun run build && bunx cap sync && bunx cap run android"
+    "cap:run": "bunx cap run android"
   },
   "keywords": [
     "devotional",
