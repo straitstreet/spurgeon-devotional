@@ -4,7 +4,7 @@ A beautiful, ultra-lightweight cross-platform devotional app featuring Charles S
 
 ![Spurgeon Devotional](https://img.shields.io/badge/devotional-spurgeon-8B4513?style=flat-square) ![PWA](https://img.shields.io/badge/PWA-enabled-4CAF50?style=flat-square) ![Bundle Size](https://img.shields.io/badge/bundle-ultra%20light-FF6B35?style=flat-square)
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Preview locally

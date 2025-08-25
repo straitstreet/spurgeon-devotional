@@ -1,6 +1,6 @@
 {
   "name": "spurgeon-devotional",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Ultra-lightweight cross-platform devotional app featuring Charles Spurgeon's Morning & Evening daily readings",
   "type": "module",
   "scripts": {

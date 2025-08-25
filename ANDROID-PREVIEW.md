@@ -1,8 +1,8 @@
-# 📱 Android Preview Guide
+# Android Preview Guide
 
 Complete guide for testing the Spurgeon Devotional Android app locally on devices and emulators.
 
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
 # Quick preview (if device already connected)
@@ -12,7 +12,7 @@ bun run preview:android:quick
 bun run preview:android
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### 1. Android Studio Setup
 - [Download Android Studio](https://developer.android.com/studio)
@@ -43,7 +43,7 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 4. Select system image (API 34+ recommended)
 5. Finish setup
 
-## 📱 Preview Commands
+## Preview Commands
 
 ### Quick Preview
 ```bash
@@ -66,7 +66,7 @@ bun run preview:android
 - Launch with logs
 - Advanced options
 
-## 🛠️ Manual Testing
+## Manual Testing
 
 ### Build APK Only
 ```bash
@@ -89,7 +89,7 @@ adb install -r path/to/app.apk
 adb shell monkey -p com.straitstreet.spurgeon -c android.intent.category.LAUNCHER 1
 ```
 
-## 📊 Development Tools
+## Development Tools
 
 ### View Device Logs
 ```bash
@@ -125,7 +125,7 @@ adb shell pm clear com.straitstreet.spurgeon
 adb shell am force-stop com.straitstreet.spurgeon
 ```
 
-## 🐛 Debugging Tips
+## Debugging Tips
 
 ### Common Issues
 
@@ -175,7 +175,7 @@ adb shell top -p $(adb shell pidof com.straitstreet.spurgeon)
 adb shell netstat | grep spurgeon
 ```
 
-## 📋 Testing Checklist
+## Testing Checklist
 
 ### Functionality Testing
 - [ ] App launches successfully
@@ -201,7 +201,7 @@ adb shell netstat | grep spurgeon
 - [ ] Touch targets are adequate
 - [ ] Accessibility features work
 
-## 🔄 Continuous Testing Workflow
+## Continuous Testing Workflow
 
 ### Development Cycle
 1. **Make changes** to web app code
@@ -218,19 +218,19 @@ Create this script for CI/CD:
 # test-android.sh
 set -e
 
-echo "🏗️ Building app..."
+echo "Building app..."
 bun run build:all
 
-echo "📱 Installing on test device..."
+echo "Installing on test device..."
 adb install -r android/app/build/outputs/apk/debug/app-debug.apk
 
-echo "🚀 Launching app..."
+echo "Launching app..."
 adb shell monkey -p com.straitstreet.spurgeon -c android.intent.category.LAUNCHER 1
 
-echo "✅ Android test complete!"
+echo "Android test complete!"
 ```
 
-## 🎯 Device Testing Matrix
+## Device Testing Matrix
 
 ### Recommended Test Devices
 - **High-end**: Pixel 7+ (Android 14+)
@@ -245,7 +245,7 @@ echo "✅ Android test complete!"
 - **Tablet**: 7-12" (different layouts)
 - **Foldable**: Special handling needed
 
-## 📈 Performance Benchmarks
+## Performance Benchmarks
 
 ### Target Metrics
 - **App startup**: < 3 seconds (cold start)
@@ -266,19 +266,19 @@ adb shell dumpsys meminfo com.straitstreet.spurgeon | head -n 20
 ls -lh android/app/build/outputs/apk/release/
 ```
 
-## 🎉 Success Indicators
+## Success Indicators
 
 Your Android preview is working when:
-- ✅ App installs without errors
-- ✅ Launches in under 3 seconds
-- ✅ All devotional content displays
-- ✅ Date navigation works smoothly
-- ✅ Morning/evening toggle responds
-- ✅ Fonts load without flickering
-- ✅ Works offline (airplane mode test)
-- ✅ Survives app backgrounding/foregrounding
+- App installs without errors
+- Launches in under 3 seconds
+- All devotional content displays
+- Date navigation works smoothly
+- Morning/evening toggle responds
+- Fonts load without flickering
+- Works offline (airplane mode test)
+- Survives app backgrounding/foregrounding
 
-## 🆘 Getting Help
+## Getting Help
 
 ### Android Studio
 - **Device Manager**: Tools → Device Manager
@@ -298,4 +298,4 @@ adb shell cat /proc/meminfo
 adb shell cat /proc/cpuinfo
 ```
 
-Happy testing! 🙏📱
+Happy testing!

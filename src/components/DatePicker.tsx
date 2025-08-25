@@ -1,4 +1,4 @@
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-preact';
 
 interface DatePickerProps {
@@ -17,6 +17,17 @@ const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 export function DatePicker({ currentDate, onDateChange, onClose }: DatePickerProps) {
   const [viewDate, setViewDate] = useState(new Date(currentDate));
   
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+    
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [onClose]);
+  
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   
@@ -30,7 +41,8 @@ export function DatePicker({ currentDate, onDateChange, onClose }: DatePickerPro
   const firstDayOfMonth = new Date(viewYear, viewMonth, 1);
   const lastDayOfMonth = new Date(viewYear, viewMonth + 1, 0);
   const firstDayOfWeek = firstDayOfMonth.getDay();
-  const daysInMonth = lastDayOfMonth.getDate();
+  // Always use leap year for February to include Feb 29
+  const daysInMonth = viewMonth === 1 ? 29 : lastDayOfMonth.getDate();
   
   // Generate calendar days
   const days = [];
@@ -62,7 +74,11 @@ export function DatePicker({ currentDate, onDateChange, onClose }: DatePickerPro
   };
   
   const handleDateClick = (date: Date) => {
-    onDateChange(date);
+    // For Feb 29, always use 2024 (leap year) to ensure the date is valid
+    const adjustedDate = (date.getMonth() === 1 && date.getDate() === 29) 
+      ? new Date(2024, 1, 29) 
+      : date;
+    onDateChange(adjustedDate);
     onClose();
   };
   

@@ -1,4 +1,4 @@
-# 🚀 Deployment Guide
+# Deployment Guide
 
 Complete guide for deploying Spurgeon Devotional to Cloudflare and Google Play Store.
 
@@ -15,7 +15,7 @@ bun run deploy:cf
 bun run build:all
 ```
 
-## 📋 Prerequisites
+## Prerequisites
 
 ### For Cloudflare Deployment
 - [Cloudflare account](https://dash.cloudflare.com/sign-up)
@@ -27,7 +27,7 @@ bun run build:all
 - [Android Studio](https://developer.android.com/studio) or Java JDK
 - Release keystore (we'll help you create one)
 
-## 🔐 First-Time Android Setup
+## First-Time Android Setup
 
 1. **Create Release Keystore**
    ```bash
@@ -43,7 +43,7 @@ bun run build:all
    bun run build:all
    ```
 
-## ☁️ Cloudflare Deployment
+## Cloudflare Deployment
 
 ### Automatic Deployment
 ```bash
@@ -74,7 +74,7 @@ bun run deploy:cf
    ]
    ```
 
-## 📱 Play Store Deployment
+## Play Store Deployment
 
 ### Interactive Deployment
 ```bash
@@ -97,7 +97,7 @@ Choose option 2 or 3 for Play Store deployment.
    - Add release notes
    - Submit for review
 
-## 📊 Version Management
+## Version Management
 
 The deploy script can automatically bump versions:
 
@@ -109,7 +109,7 @@ Version numbers sync across:
 - `package.json`
 - Android `versionName` and `versionCode`
 
-## 🛠 Advanced Configuration
+## Advanced Configuration
 
 ### Environment Variables
 
@@ -137,7 +137,7 @@ View bundle analysis:
 bun run analyze
 ```
 
-## 📂 File Structure
+## File Structure
 
 ```
 spurgeon-devotional/
@@ -152,7 +152,7 @@ spurgeon-devotional/
 └── wrangler.toml            # Cloudflare config
 ```
 
-## 🚨 Security Best Practices
+## Security Best Practices
 
 ### Keystore Security
 - **Never** commit keystore files to version control
@@ -175,7 +175,7 @@ android/app/*.jks
 - Set minimum required permissions
 - Rotate keys regularly
 
-## 📱 App Store Guidelines
+## App Store Guidelines
 
 ### Google Play Store
 - **Target API**: Android 14 (API level 34)
@@ -190,7 +190,7 @@ android/app/*.jks
 - Proper app description ✅
 - Privacy policy (if collecting data)
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Build Failures
 ```bash
@@ -221,7 +221,7 @@ cd .. && bun run build:all
 - **Wrong password**: Re-run `bun run setup:keystore`
 - **Permission errors**: Check file permissions
 
-## 📈 Monitoring & Analytics
+## Monitoring & Analytics
 
 ### Cloudflare Analytics
 - View traffic in Cloudflare dashboard
@@ -234,7 +234,7 @@ cd .. && bun run build:all
 - Performance insights
 - User reviews
 
-## 🎉 Success Checklist
+## Success Checklist
 
 ### Before First Deployment
 - [ ] Keystore created and secured
@@ -251,7 +251,7 @@ cd .. && bun run build:all
 - [ ] Android bundle uploaded
 - [ ] Both platforms live
 
-## 📞 Support
+## Support
 
 - **Build issues**: Check build logs
 - **Cloudflare**: [Cloudflare Docs](https://developers.cloudflare.com/workers/)

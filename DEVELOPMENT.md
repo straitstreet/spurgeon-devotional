@@ -1,4 +1,4 @@
-# 🛠️ Development Guide
+# Development Guide
 
 ## Available Commands
 

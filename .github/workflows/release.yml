@@ -1,4 +1,4 @@
-name: 🚀 Release
+name: Release
 
 on:
   push:
@@ -16,23 +16,23 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: 📥 Checkout code
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Needed for release notes generation
           
-      - name: 📦 Setup Bun
+      - name: Setup Bun
         uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
           
-      - name: 🔧 Install dependencies
+      - name: Install dependencies
         run: bun install
         
-      - name: 🏗️ Build web application
+      - name: Build web application
         run: bun run build
         
-      - name: 📝 Generate release notes
+      - name: Generate release notes
         id: release_notes
         run: |
           VERSION=${{ github.ref_name || github.event.inputs.version }}
@@ -46,7 +46,7 @@ jobs:
           cat release-notes-web.md >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
           
-      - name: 🌐 Deploy to Cloudflare
+      - name: Deploy to Cloudflare
         if: github.event_name == 'push'  # Only deploy on tag push
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -54,7 +54,7 @@ jobs:
           node build-worker.js
           bunx wrangler deploy --env production
           
-      - name: 📱 Build Android AAB
+      - name: Build Android AAB
         if: github.event_name == 'push'
         run: |
           # Set up JDK for Android build
@@ -67,19 +67,19 @@ jobs:
           # Build AAB (requires signing setup in secrets)
           cd android && ./gradlew bundleRelease
           
-      - name: 🎉 Create GitHub Release
+      - name: Create GitHub Release
         if: github.event_name == 'push'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: 🙏 Spurgeon Devotional ${{ steps.release_notes.outputs.version }}
+          release_name: Spurgeon Devotional ${{ steps.release_notes.outputs.version }}
           body: ${{ steps.release_notes.outputs.web_notes }}
           draft: false
           prerelease: ${{ contains(github.ref_name, '-') }}
           
-      - name: 📦 Upload Release Assets
+      - name: Upload Release Assets
         if: github.event_name == 'push'
         uses: actions/upload-release-asset@v1
         env:
@@ -90,7 +90,7 @@ jobs:
           asset_name: spurgeon-devotional-${{ steps.release_notes.outputs.version }}.aab
           asset_content_type: application/octet-stream
           
-      - name: 📱 Upload to Play Store
+      - name: Upload to Play Store
         if: github.event_name == 'push' && secrets.PLAY_STORE_SERVICE_ACCOUNT_JSON
         uses: r0adkll/upload-google-play@v1
         with:
@@ -101,7 +101,7 @@ jobs:
           status: draft  # Start as draft for manual review
           whatsNewDirectory: .
           
-      - name: 📄 Upload Release Notes
+      - name: Upload Release Notes
         uses: actions/upload-artifact@v4
         with:
           name: release-notes

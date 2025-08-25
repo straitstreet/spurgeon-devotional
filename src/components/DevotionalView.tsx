@@ -40,7 +40,9 @@ export function DevotionalView({ devotional, currentDate, onDateChange }: Devoti
     
     // Create new date
     const newDateInfo = allDates[newIndex];
-    const newDate = new Date(currentDate.getFullYear(), newDateInfo.month - 1, newDateInfo.day);
+    // For Feb 29, always use 2024 (leap year) to ensure the date is valid
+    const year = (newDateInfo.month === 2 && newDateInfo.day === 29) ? 2024 : currentDate.getFullYear();
+    const newDate = new Date(year, newDateInfo.month - 1, newDateInfo.day);
     onDateChange(newDate);
   };
 
@@ -84,7 +86,7 @@ export function DevotionalView({ devotional, currentDate, onDateChange }: Devoti
           alignItems: 'center', 
           gap: '0.5rem',
           flex: 1,
-          justifyContent: 'center'
+          justifyContent: 'flex-start'
         }}>
           <button
             onClick={() => navigateDate('prev')}
@@ -218,37 +220,31 @@ export function DevotionalView({ devotional, currentDate, onDateChange }: Devoti
         margin: '0 auto',
         padding: '0 1rem 2rem 1rem'
       }}>
-        <div className="verse-reference" style={{
-          textAlign: 'center',
-          marginBottom: '1rem'
-        }}>
-          {currentReading.verse}
-        </div>
-        
         <div style={{ 
           fontStyle: 'italic',
           color: 'var(--color-brown-700)',
-          marginBottom: '2rem',
+          marginBottom: '1rem',
           fontSize: '1.125rem',
           lineHeight: '1.7',
           textAlign: 'center',
-          background: 'rgba(255,255,255,0.6)',
-          padding: '1rem',
-          borderRadius: '12px',
-          backdropFilter: 'blur(10px)'
+          fontFamily: 'var(--font-display)'
         }}>
           "{currentReading.text}"
         </div>
         
-        <div className="reading-content" style={{
-          background: 'rgba(255,255,255,0.7)',
-          padding: '1.5rem',
-          borderRadius: '16px',
-          backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255,255,255,0.3)'
+        <div className="verse-reference" style={{
+          textAlign: 'center',
+          marginBottom: '2rem',
+          fontFamily: 'var(--font-display)'
         }}>
+          {currentReading.verse}
+        </div>
+        
+        <div className="reading-content">
           {currentReading.content.split('\n').map((paragraph, index) => (
-            <p key={index} style={{ marginBottom: paragraph.trim() ? '1rem' : '0' }}>{paragraph}</p>
+            <p key={index} style={{ marginBottom: paragraph.trim() ? '1rem' : '0' }}>
+              {paragraph}
+            </p>
           ))}
         </div>
       </div>

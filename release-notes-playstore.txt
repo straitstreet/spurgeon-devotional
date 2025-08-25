@@ -1,0 +1,14 @@
+🙏 Spurgeon Devotional v1.0.1
+
+What's new in this version:
+
+✨ Improve app functionality and user experience
+🔧 Docs: add local preview capabilities and workflow automation
+✨ Add auto-generated release notes with smart categorization
+🔧 Optimize devotional data loading and compression
+
+📖 Daily readings from Charles Spurgeon's beloved "Morning & Evening"
+⚡ Fast, offline-capable, and beautifully designed
+🎯 Perfect for daily devotional time
+
+Thank you for using Spurgeon Devotional! 🙏
