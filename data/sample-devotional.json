@@ -1,0 +1,39 @@
+{
+  "title": "Morning and Evening by Charles H. Spurgeon",
+  "description": "Daily devotional readings for morning and evening",
+  "year": 2025,
+  "devotionals": {
+    "01-01": {
+      "morning": {
+        "date": "January 1",
+        "time": "Morning",
+        "verse": "Genesis 1:1",
+        "text": "In the beginning God created the heaven and the earth.",
+        "content": "Sample devotional content for January 1st morning..."
+      },
+      "evening": {
+        "date": "January 1", 
+        "time": "Evening",
+        "verse": "Revelation 22:13",
+        "text": "I am Alpha and Omega, the beginning and the end, the first and the last.",
+        "content": "Sample devotional content for January 1st evening..."
+      }
+    },
+    "08-24": {
+      "morning": {
+        "date": "August 24",
+        "time": "Morning", 
+        "verse": "Psalm 119:105",
+        "text": "Thy word is a lamp unto my feet, and a light unto my path.",
+        "content": "Sample morning devotional for August 24th..."
+      },
+      "evening": {
+        "date": "August 24",
+        "time": "Evening",
+        "verse": "Exodus 22:6", 
+        "text": "If fire break out, and catch in thorns, so that the stacks of corn, or the standing corn, or the field, be consumed therewith; he that kindled the fire shall surely make restitution.",
+        "content": "When fire breaks out in a field, spreading from one area to another, the person who started it bears full responsibility for all the damage. This principle extends beyond literal fires to the spiritual and social realm. When we kindle the fires of discord, gossip, or harmful doctrines, we become responsible for all the destruction that follows. How careful we must be with our words and actions, lest they spark flames that consume far more than we ever intended. The wise person considers not just the immediate effect of their actions, but the potential for harm to spread. Let us pray for wisdom to be peacemakers rather than fire-starters, and when we have caused damage, to humbly make full restitution."
+      }
+    }
+  }
+}

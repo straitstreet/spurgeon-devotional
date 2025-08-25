@@ -1,0 +1,26 @@
+node_modules
+
+# Build outputs
+dist/
+android/app/build/
+android/build/
+android/.gradle/
+android/capacitor-cordova-android-plugins/build/
+
+# Signing keys - NEVER commit these!
+*.keystore
+*.jks
+android/app/release.keystore
+android/key.properties
+
+# Capacitor
+android/app/src/main/assets/public/
+ios/App/App/public/
+ios/App/public/
+
+# Local configuration
+android/local.properties
+
+# IDE
+.vscode/
+.idea/

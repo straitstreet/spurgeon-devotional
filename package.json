@@ -1,0 +1,40 @@
+{
+  "name": "spurgeon-devotional",
+  "version": "1.0.0",
+  "description": "Ultra-lightweight cross-platform devotional app featuring Charles Spurgeon's Morning & Evening daily readings",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run vite",
+    "build": "bun run vite build",
+    "preview": "bun run vite preview",
+    "analyze": "bunx vite-bundle-analyzer",
+    "install": "bun install",
+    "cap:init": "bunx cap init",
+    "cap:add": "bunx cap add android",
+    "cap:sync": "bun run build && bunx cap sync",
+    "cap:run": "bunx cap run android",
+    "android:build": "bun run build && bunx cap sync && bunx cap run android"
+  },
+  "keywords": [
+    "devotional",
+    "spurgeon",
+    "pwa",
+    "cross-platform",
+    "lightweight"
+  ],
+  "author": "StraitStreet",
+  "license": "MIT",
+  "devDependencies": {
+    "@preact/preset-vite": "^2.8.2",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8",
+    "vite-plugin-pwa": "^0.17.5",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/android": "^6.0.0"
+  },
+  "dependencies": {
+    "preact": "^10.19.3",
+    "lucide-preact": "^0.460.0"
+  }
+}

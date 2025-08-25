@@ -1,0 +1,219 @@
+:root {
+  --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Newsreader', Georgia, 'Times New Roman', serif;
+  
+  --color-cream: #f9f7f4;
+  --color-warm-white: #fdfcfa;
+  --color-brown-900: #2d1b0e;
+  --color-brown-800: #3d2516;
+  --color-brown-700: #4a2e1c;
+  --color-brown-600: #5a3623;
+  --color-brown-200: #d4c4b0;
+  --color-brown-100: #e8ddd1;
+  --color-gold-500: #d4af37;
+  --color-gold-400: #e6c766;
+  
+  --shadow-subtle: 0 1px 3px rgba(45, 27, 14, 0.1);
+  --shadow-medium: 0 4px 12px rgba(45, 27, 14, 0.15);
+  --radius: 8px;
+  --radius-lg: 12px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-brown-900);
+  background-color: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-brown-900);
+}
+
+h1 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+h2 {
+  font-size: clamp(1.25rem, 3vw, 1.875rem);
+}
+
+h3 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
+/* Layout utilities */
+.container {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+/* Components */
+.card {
+  background: var(--color-warm-white);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-medium);
+  border: 1px solid var(--color-brown-100);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-brown-800);
+  color: var(--color-warm-white);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-brown-900);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: var(--color-brown-100);
+  color: var(--color-brown-800);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-brown-200);
+}
+
+/* Navigation */
+.nav-pill {
+  background: var(--color-brown-100);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.nav-pill button {
+  flex: 1;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  border-radius: calc(var(--radius) - 2px);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-brown-700);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-pill button.active {
+  background: var(--color-warm-white);
+  color: var(--color-brown-900);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Reading styles */
+.reading-content {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-brown-800);
+}
+
+.reading-content p {
+  margin-bottom: 1rem;
+}
+
+.reading-content p:last-child {
+  margin-bottom: 0;
+}
+
+.verse-reference {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-gold-500);
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* Loading states */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--color-brown-600);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .card {
+    margin: 0 -0.5rem;
+    border-radius: var(--radius);
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .card {
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+}
