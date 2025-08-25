@@ -99,9 +99,10 @@ const main = async () => {
   // Show next steps
   log(`\n${colors.bold}Next steps:${colors.reset}`);
   log(`• Test web build: ${colors.blue}bun run preview${colors.reset}`);
+  log(`• Test Android app: ${colors.blue}bun run preview:android:quick${colors.reset}`);
   log(`• Deploy to web: Upload ./dist/ to your hosting provider`);
   if (fs.existsSync('android/app/build/outputs/apk/release/app-release.apk')) {
-    log(`• Install Android: adb install android/app/build/outputs/apk/release/app-release.apk`);
+    log(`• Install Android APK: adb install android/app/build/outputs/apk/release/app-release.apk`);
   }
 };
 
